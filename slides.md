@@ -6,168 +6,222 @@ backgroundColor: #EeEeFf
 marp: true
 ---
 
-# Developer Productivity
+#  Unlocking Developer Productivity
+
+<footer>
+Noah Labrecque
+</footer>
 
 ---
 
-## What is productivity?
+# Alice : 10 lines
 
-As a developer you might...
-
-* Fix bugs
-* Add new features
-* Refactor code
+# Bob : 500 lines
 
 ---
 
-<!-- ## If it's a thing... can it be measured? -->
-```c
-float Q_rsqrt( float number )
-{
-	long i;
-	float x2, y;
+<h1 style="position:absolute; display:inline; top:0px;left:25%">Alice</h1>
 
-	const float threehalfs = 1.5F;
-	x2 = number * 0.5F;
-	y  = number;
-        // evil floating point bit level hacking
-	i  = * ( long * ) &y;                       
-        // what the fuck? 
-	i  = 0x5f3759df - ( i >> 1 );               
-	y  = * ( float * ) &i;
-        // 1st iteration
-	y  = y * ( threehalfs - ( x2 * y * y ) );   
-        // 2nd iteration, this can be removed
-        // y  = y * ( threehalfs - ( x2 * y * y ) );   
-	return y;
-}
-```
+<h1 style="position:absolute; display:inline;
+top:-2rem; right:20%">Bob</h1>
+
+![bg 90%](code_comparepng.png)
 
 ---
 
-
-```js
-function isEven(number) {
-    if (number == 0) return true;
-    if (number == 1) return false;
-    if (number == 2) return true;
-    if (number == 3) return false;
-    if (number == 4) return true;
-    if (number == 5) return false;
-    if (number == 6) return true;
-    if (number == 7) return false;
-    if (number == 8) return true;
-    if (number == 9) return false;
-    if (number == 10) return true;
-    if (number == 11) return false;
-    if (number == 12) return true;
-    if (number == 13) return false;
-    if (number == 14) return true;
-    if (number == 15) return false;
-    if (number == 16) return true;
-    if (number == 17) return false;
-    if (number == 18) return true;
-    if (number == 19) return false;
-    ...
-    if (number == 499) return false;
-    if (number == 500) return true;
-}
-```
----
-- Define productivity in broad stokes, 
-- Make sure to outline that productivity can take many forms, and that good metrics are really hard.
-	- Different types of productivity can't be directly compared,
-	- "Producing" isn't necessary for productivity. (time spend reviewing/improving is still productive)
-	- Not all lines of code are equal
-	- Learning is productive
-
-## Introduce the main pitfalls
+# Common Pitfalls
 
 1. Technical Debt
 2. Inefficient sharing of knowledge (siloing)
 3. Misdirected Work
 4. Poor tooling
 
+---
 
-## Technical Debt
+# Question time!
 
-### Quick definition of technical debt
+Have you ever written code that you apologized for in a comment?
 
-Small audience interaction, ask people to raise hand if they have ever written code that made them feel as if they needed to apologize for it in a comment.
+<br>
+<br>
+<br>
 
-Follow up by talking about the reasons this might have happened valid or otherwise.
+```js
+// i'm so sorry...
+const = re = /(?<=[^\d,.]|^)\d{1,3}(,*((?=[,.](\s|$))?(?=[^\d,.]|$)))/
+```
+---
+# 1. Technical Debt
 
-### Causes / Repercussions
- - The trade off between speed now and speed later
- - Just like real debt, technical debt has interest to pay.
- - Technical debt isn't always bad, but it must be accounted for
- - Technical debt can slow development to a crawl
+> The increased cost of making future changes due to past or present decisions.
 
-### How to deal with it
+- Tightly coupled systems
+- Complex undocumented code
+- Duplicated code
 
- - Proactive prevention
+---
+
+![bg 75%](debt.png)
+
+---
+<!-- _class: lead -->
+# It's not all bad...
+
+--- 
+
+## Prevention
+
  - Code reviews
  - Pay attention to Signal/Noise ratio 
+ - Pair programming
+ - Linting
 
+---
+# 2. Knowledge Finding
 
-## Knowledge Finding
+- Asking coworkers
+- Documentation
+- Internet searches
+- Reading code
 
-### Introduce what is meant by knowledge finding
+---
 
- - Searching for information
-	 - This can take the form of
-	 - Asking coworkers
-	 - Documentation
-	 - Internet searches
-	 - etc.
+<!-- _backgroundColor: #202C44 -->
 
-### Stack overflow stats
+![bg](time_spent.png)
 
- - Teams encounter a lot of knowledge silos
- - [teams spend a lot of time looking info and answering questions](https://survey.stackoverflow.co/2022/#section-productivity-impacts-daily-time-spent-searching-for-answers-solutions)
+<footer>
+https://survey.stackoverflow.co/2022/#section-productivity-impacts-daily-time-spent-searching-for-answers-solutions
+</footer>
 
-### How to prevent
-- Take time to pre-emptively document procedures and protocols
-- Communicate with coworkers, even across teams, 
-	- Different companies will have different amounts of overlapping concerns
+---
 
+# Causes
 
-## Misdirected Work
+- Knowledge Siloing
+- Poor/non-existent documentation
+- Competitive / unfriendly culture
 
-Just because it takes effort, does not make it productive.
+---
+# Prevention
 
-### Outline different types
+- Preemptive documentation
+- Create report with coworkers 
+- Work on cross-cutting concerns
+- Make knowledge sharing explicit
+  - Technical blogs
+  - Presentations
+  - Workshops
+---
+
+# Misguided Work
+
+<br>
+<br>
+
+#### Just because it takes effort, does **not** make it productive.
+
+<br>
 
 - Overlapping work
-	- If two people end up doing the same thing, this not only contributes to technical debt, but also is spent time that could be used for something else.
 - Unnecessary work
-	- Some things aren't really that important
-	- Constantly re-evaluate what the most effective thing you could be doing is
-- Misguided work
-	- Using the wrong tool
-	- the wrong algorithm 
-	- there's something small your not considering
+- Uninformed work
+
+---
+### Causes
+
+- Working on the same thing as a coworker
+- Solving a problem that has already been solved
+- Using the wrong tool for the job
+
+---
 
 ### Prevention
 
-- Plan tasks before starting (to a reasonable degree)
-- Communicate your intentions with your team
-- If you hit a block, 
-	- Talk about it
-	- Take a break
-	- Break into the silo
+- Creating a plan
+- Communication of intentions
+- Pair programming
+- Keep documentation up to date
+- Don't re-invent the wheel
+- Don't be a hammer
 
+---
 
-## Conclusion
+# 4. Poor Tooling
+<br>
+<br>
+<div style="display:flex; flex-direction:column; align-items: center;">
+	<b>Slow unit testing</b>
+	<b>+</b>
+	<b>No automation</b>
+	<b>+</b>
+	<b>Slow deployment</b>
+	<b>=</b>
+	<b>Delayed feedback loop</b>
+</div>
 
-Quick rundown of the different pitfalls / lessons learned about each
+---
+<!-- _class: lead -->
 
-### Open ended question
+# Fast feedback matters
 
-What aspects do you think are different in a professional versus school setting when it comes to productivity.
+---
 
+# Tighten the loop
+
+- Optimize unit tests
+- Automate as much as possible
+- Linting / static analysis
+- Good errors matter
+
+---
+
+<!-- _class: lead -->
+# Modeling Teams
+
+![bg 75%](https://imgs.search.brave.com/lCLWjce_PZsc9FkJUFSR_daZq9i9Uay9y4gXg5iwtlE/rs:fit:1200:799:1/g:ce/aHR0cHM6Ly9ibG9n/LnRlbGV4YXJzb2Z0/d2FyZS5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMTkvMTAv/MV9UTko3UnByNUcx/T0pIdEtILUlCRUZ3/LnBuZw)
+
+---
+
+# Knowing the connections and dependencies between teams
+
+This lets us,
+
+- Find knowledge silos
+- Predict blocking issues
+- Make roles more explicit
+- Align goals between teams
+
+---
+
+# Horizontal / Vertical teams
+
+Involvement in many parts of development...
+
+- This can help prevent knowledge siloing
+- But.. It creates dependencies
+
+---
+
+# In conclusion
+
+### Account for technical debt
+### Ask and answer questions
+
+### Invest in tooling
+
+---
+<!-- _class: lead -->
+
+### Question:
+
+# What aspects do you think are different in a professional versus school setting, when it comes to productivity?
+
+---
 
 ## Sources
-[Starter Source](https://shopify.engineering/modelling-developer-infrastructure-teams)
-[technical debt](https://medium.com/serious-scrum/the-hidden-cost-of-technical-debt-1963b958e5ed)
-[stack overflow servey](https://survey.stackoverflow.co/2022/#professional-developers-productivity-impacts)
+
+- Starter Source: https://shopify.engineering/modelling-developer-infrastructure-teams
+- Technical debt: https://medium.com/serious-scrum/the-hidden-cost-of-technical-debt-1963b958e5ed
+- Stack Overflow Developer survey: https://survey.stackoverflow.co/2022/#professional-developers-productivity-impacts
+- Quake 3 algorithm: https://archive.softwareheritage.org/browse/content/sha1_git:bb0faf6919fc60636b2696f32ec9b3c2adb247fe/?origin_url=https://github.com/id-Software/Quake-III-Arena&path=code/game/q_math.c&revision=dbe4ddb10315479fc00086f08e25d968b4b43c49&snapshot=4ab9bcef131aaf449a7c01370aff8c91dcecbf5f#L549-L572
